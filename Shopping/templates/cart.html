@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+	{% block content %}
+    <h1 class="text-white text-center" style="margin-top: 100px;">Cart</h1>
+    <section class="menu-food mt-3 d-flex justify-content-start flex-wrap">
+    
+        <table class="table  text-white">
+            <thead class="table-danger">
+                <th>Sr</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>MRP</th>
+                <th>Discount</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Qnty</th>
+            </thead>
+            {% if cart %}
+            {% for d in cart %} 
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{d.name}}</td>
+                <td><img src="{{d.name.image.url}}" class="rounded" alt="no" height="100px" width="100px"></td>
+                <td>₹{{d.name.price | intcomma}} </td>
+                <td>₹{{d.name.discount_price | intcomma}}</td>
+                <td>₹{{d.name.actual_price | intcomma}}</td>
+                <td>₹{{d.ammount | intcomma}}</td>
+                <td> <div><a href="{% url 'qntysub' d.name.id %}">-</a> {{d.counter}} <a href="{% url 'qntyadd' d.name.id %}">+</a></div>
+                    <a href="{% url 'remove' d.name.id %}" class="btn btn-outline-danger">remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+    
+            {% else %}
+            <tr>
+                <td colspan="8" class="text-center">
+                    <h2 class="alert  text-center text-white">Cart is empty<i class="fa-solid fa-cart-arrow-down"></i></h2>
+                    <a href="{% url 'index' %}" class="btn btn-outline-warning">continue shopping</a>
+                </td>
+            </tr>
+            
+            {% endif %}
+            
+            <tr>
+                <td colspan="4" class="alert bg-dark text-center text-white "> Total Amount</td>
+                <td colspan="4" class="alert bg-dark text-center text-white ">₹{{M | intcomma}} </td>
+            </tr>
+            <tr>
+                <td colspan="8" class="alert bg-dark text-center text-white "> <a href="{% url 'order' %}">Place Order</a></td>
+                
+            </tr>
+        </table>
+        
+    </section>
+	
+
+	  
+	{% endblock content %}	

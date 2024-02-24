@@ -1,0 +1,28 @@
+
+
+.player{
+    background: url(../images/pexels.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+#pb{
+    background: url(../images/back4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.player .imgbox{
+    margin-top: 80px;
+    background-color: #f1f3f4;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+
+}
+

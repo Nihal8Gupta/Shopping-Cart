@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<h1 class="text-white text-center" style="margin-top: 100px;">Order History</h1>
+        <!-- Page Header End -->
+        <div class="text-center text-dark"> Order history</div>
+    {% if OH %}
+        {% for o in OH %}
+        <div class="d-flex justify-content-around align-items-center text-white border m-1 mb-2">
+            <div class="d-flex m-1">
+                <img src="{{o.product.image.url}}" width="200px" height="200px" alt="no">
+                <div class="card-body">
+                    <h5>Product : {{o.product}}</h5>
+                    <p class="font-weight-bold">Price : {{o.amount | intcomma}}</p>
+                    <p class="font-weight-bold">Qnt : {{o.quantity}}</p>
+                    <p class="font-weight-bold">Date : {{o.date}}</p>
+                </div>
+            </div>
+            <div>
+                <h4>Order Status : <span class="alert alert-warning">{{o.status}}</span></h4>
+                <br>
+                <br>
+                <h4>Payment Status : <span class="alert alert-success">Successfull</span></h4>
+            </div>
+        </div>
+        {% endfor %}
+    
+        {% else %}
+        <div class="d-flex flex-column align-items-center">
+            <h2 class="alert  text-center text-white">Order is empty<i class="fa-solid fa-cart-arrow-down"></i></h2>
+            <div>
+                <a href="{% url 'index' %}" class="btn btn-outline-warning ">continue shopping</a>
+            </div>
+        </div>
+        
+        {% endif %}
+
+        <br>
+{% endblock  %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+	{% block content %}
+
+	<h3 class="text-white mx-4" style="margin-top:100px;">Product</h3>
+	<!-- start category area-->
+	<section class="d-flex flex-wrap" >
+		
+		
+		<!--song card start-->
+		{% for MU in ALL %}
+		
+		  <div class="m-4" style="border-radius:30px 0 30px 0;" >
+			<a href="{% url 'product' MU.category %}">
+			<div class="imgbox" style="position: relative; border-radius:30px 0 30px 0;">
+				<img src="{{ MU.image.url }}" class="big-song-img rounded img-fluid" >
+				<div class="big-song-hover " >
+						
+				</div>					
+			
+				</div>				
+			<div>				
+				<div class="lead text-white">{{MU.category}}</div>
+				
+			</div>
+		</a>
+		</div>
+		{% endfor %}
+		<!--song card end-->
+
+
+	</section>
+	<!-- end category area-->
+
+
+
+	
+
+	  
+	{% endblock content %}	

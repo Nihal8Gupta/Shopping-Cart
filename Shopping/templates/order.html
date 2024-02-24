@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+ {% block content %}
+ <h1 class="text-white text-center" style="margin-top: 100px;">Order</h1>
+ <section class="m-2">
+
+    <div class="col-12 d-flex justify-content-around">
+    
+        <div class="col-5">
+            <h3 class="alert  text-center text-white">Order Summary</h3>
+            <div class="overflow-auto p-1 mb-3 mb-md-0 mr-md-3 " style="max-width: 500px; max-height: 350px;">
+                {% for pro in order %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5>Product : {{pro.name}}</h5>
+                        <p>Quantity : {{pro.counter}}</p>
+                        <p class="font-weight-bold">Price : {{pro.name.price | intcomma}}</p>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        
+        <div class="col-5">
+            <h3 class="alert  text-center text-white">Payable Amount</h3>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5>MRP : {{am | intcomma}}</h5>
+                    <h5>Discount : {{disc | intcomma}}</h5>
+                    <h5>Price : {{p | intcomma}}</h5>
+                    <h6>Shipping Charge : {{sc | intcomma}}</h6>
+                    <h6>Total :  {{ta | intcomma}}</h6>
+                    
+                    
+                </div>
+            </div>
+             <!-- Set up a container element for the button -->
+             <form action="{% url 'payment' %}" id="myform">
+                <div id="paypal-button-container"></div>
+                
+             </form>
+                
+            <!-- <a href="#" class="btn btn-warning form-control">Pay</a> -->
+            <hr>
+            <div>
+                <h5 class="text-white">We accept</h5>
+                <p class="text-white">Visa,UPI,RuPay..etc</p>
+            </div>
+        </div>
+    </div>
+ </section>
+   
+ {% endblock content %}
+
+ 
+ {% block payment %}
+   <!-- Include the PayPal JavaScript SDK -->
+   
+<script src="https://www.paypal.com/sdk/js?client-id=AXMhPiSndCivEaEPWF17b_aOPSy8zsh_bSEjG1QEXcgX4VgqTIINEppuCy3C6hNC_4jkmteY2DUDyXWS&currency=USD"></script>
+
+<script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+        // Set up the transaction
+        createOrder: function(data, actions) { 
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{ta}}'
+                    }
+                }]
+            });
+        },
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer 
+                alert('Transaction completed by {{user.first_name}} with ' + details.payer.name.given_name + 'account !');
+                document.getElementById('myform').submit()
+            });
+        }
+        }).render('#paypal-button-container');
+</script>
+ {% endblock payment %}
+   
+ 

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h3 class="text-center text-white" style="margin-top: 100px;">Signup</h3>
+
+<div class="col-6  m-auto border" style="border-radius: 10px;">
+  <form method="post" class="m-3">
+    {% csrf_token %}
+    {% if message %}
+          <div class="form-group alert alert-danger">{{message}}</div>
+        {% endif %}
+
+    <div class="form-outline mb-4">
+      <input type="text" id="form3Example1cg" placeholder="enter username" name="username" class="form-control form-control-lg" />
+      <label class="form-label" for="form3Example1cg">Username</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="email" id="form3Example3cg" placeholder="enter email" name="email" class="form-control form-control-lg" />
+      <label class="form-label" for="form3Example3cg">Your Email</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="password" id="form3Example4cg" placeholder="enter password" name="password" class="form-control form-control-lg" />
+      <label class="form-label" for="form3Example4cg">Password</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="password" id="form3Example4cdg" placeholder="enter password" name="cpassword" class="form-control form-control-lg" />
+      <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+    </div>
+
+    
+
+    <div class="d-flex justify-content-center">
+      <button type="submit"
+        class="btn btn-outline-dark btn-block btn-lg text-white ">Register</button>
+    </div>
+
+    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}"
+        class="fw-bold text-body"><u class="text-white">Login here</u></a></p>
+
+  </form>
+
+
+</div>
+  
+
+
+  
+{% endblock content %}

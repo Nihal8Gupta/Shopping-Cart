@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+	{% block content %}
+
+	<h3 class="text-white mx-3" style="margin-top:100px;">Product Detail</h3>
+	<!-- start category area-->
+	<section class="d-flex flex-wrap" >
+		
+		
+		<!--song card start-->
+		
+		
+		  <div class="d-flex m-4">
+            <div class="m-3">
+                <img src="{{pro.image.url}}"  alt="no" height="512px" width="512px" style="border-radius:15px 0 0 15px ;">
+            </div>
+            <div class="m-3">
+                <h3 class="text-white">{{pro.name}}</h3>
+                <h4 class="text-white">{{pro.details}}</h4>
+                <h4 class="text-white">MRP : <s>{{ pro.price | intcomma }}</s></h4>
+                <h4 class="text-white">Price : {{pro.actual_price | intcomma}}</h4>
+                {% if pro.is_available %}
+                  <a href="{% url 'cart' pro.id %}" class="btn btn-warning" >Add to cart</a>
+                  {% else %}
+                  <input type="text" readonly class="btn btn-danger" value="Out of stock">
+                {% endif %}
+                <a href="{% url 'product' pro.category %}" class="btn btn-secondary">Back</a>
+            </div>
+          </div>
+		
+		<!--song card end-->
+
+
+	</section>
+	<!-- end category area-->
+
+
+
+	
+
+	  
+	{% endblock content %}	

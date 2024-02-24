@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+ <!-- Main Content -->
+ <br>
+ <h5 class="song-category-title mt-5 pt-4" >&nbsp; Profile </h5>
+
+ <!-- start category area-->
+ <section class="pt-2 p-4 mx-5 d-flex justify-content-center flex-column align-items-center ">
+     
+    <img class="rounded-circle" src="{{pic.user_pic.url}}"  style="width:160px; height:160px; margin-bottom:15px;">
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-outline mb-4">
+            <input type="file" name="img" class="form-control">
+        </div>
+        
+        <div class="form-outline mb-2">
+            <input type="text" id="un" name="username" placeholder="Enter your name" class="form-control form-control-lg" value="{{pic.username}}" />
+            <label class="form-label text-light" for="un">Username</label>
+          </div>
+        
+          <div class="form-outline mb-2">
+            <input type="email" id="ad" name="email" class="form-control form-control-lg" placeholder="Enter your email" value="{{pic.username.email}}"/>
+            <label class="form-label text-light" for="ad">Email</label>
+        </div>
+
+        <div class="form-outline mb-2">
+            <input type="text" id="ad" name="address" class="form-control form-control-lg" placeholder="Enter your address" value="{{pic.address}}"/>
+            <label class="form-label text-light" for="ad">Address</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="submit" class="btn btn-info" value="save">
+        </div>
+
+        
+    </form>
+
+    
+
+
+
+
+
+ </section>
+ <!-- end category area-->
+
+
+  
+{% endblock content %}

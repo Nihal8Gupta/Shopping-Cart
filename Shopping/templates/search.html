@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+	{% block content %}
+
+	<h3 class="text-white mx-4" style="margin-top:100px;">Product</h3>
+	<!-- start category area-->
+	<section class="d-flex flex-wrap" >
+		
+		
+		<!--song card start-->
+		{% for MU in Pro %}
+		
+		  <div class="m-4" style="border-radius:30px 0 30px 0;" >
+			<div class="imgbox" style="position: relative; border-radius:30px 0 30px 0;">
+                <a href="{% url 'productinfo' MU.pk %}">
+				<img src="{{ MU.image.url }}" class="big-song-img rounded img-fluid" >
+				
+					<div class="big-song-hover " >
+					</div>					
+                    
+				</div>                				
+			<div>				
+				<div class="lead text-white">{{MU.name}}</div>
+				<small class="text-muted">Price: <s>{{MU.price| intcomma}}</s></small>
+				<small class="text-muted">{{MU.actual_price| intcomma}}</small>
+			</div>
+        </a>
+		</div>
+		{% endfor %}
+		<!--song card end-->
+
+
+	</section>
+	<!-- end category area-->
+
+
+
+	
+
+	  
+	{% endblock content %}	
